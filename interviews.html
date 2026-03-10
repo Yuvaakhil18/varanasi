@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interviews & Insights | S. S. Rajamouli</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+</head>
+<body>
+    <!-- Sliding Banner (reuse) -->
+    <div class="sliding-banner">
+        <div class="banner-content">
+            <span>FROM THE MAKERS OF BAAHUBALI & RRR — A FILM BY DIRECTOR S. S. RAJAMOULI</span>
+            <span>FROM THE MAKERS OF BAAHUBALI & RRR — A FILM BY DIRECTOR S. S. RAJAMOULI</span>
+            <span>FROM THE MAKERS OF BAAHUBALI & RRR — A FILM BY DIRECTOR S. S. RAJAMOULI</span>
+        </div>
+    </div>
+
+    <!-- Animated Background (reuse) -->
+    <div class="background-container">
+        <div class="background-slider">
+            <div class="slide"></div>
+            <div class="slide"></div>
+            <div class="slide"></div>
+            <div class="slide"></div>
+            <div class="slide"></div>
+            <div class="slide"></div>
+            <div class="slide"></div>
+        </div>
+        <div class="overlay"></div>
+        <img src="./images/stamp.png" alt="Stamp" class="stamp">
+    </div>
+
+    <!-- Main Content -->
+    <main class="content">
+        <div class="title-section">
+            <p class="director-credit">S S RAJAMOULI'S</p>
+            <h1 class="movie-title">VARANASI</h1>
+        </div>
+    </main>
+
+    <!-- Interviews & Insights Section (same as index) -->
+    <section class="interviews-section" id="interviews">
+        <div class="interviews-heading-container">
+            <h2 class="interviews-heading" data-aos="fade-up">🎤 Interviews & Insights</h2>
+            <div class="gold-underline"></div>
+            <p class="interviews-subtitle" data-aos="fade-up" data-aos-delay="100">Behind the Vision. Beyond the Screen.</p>
+        </div>
+        <div class="interviews-grid">
+            <!-- Interview Card 1 -->
+            <div class="interview-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="interview-thumb">
+                    <img src="images/interview1.jpg" alt="Interview 1 Thumbnail">
+                </div>
+                <div class="interview-content">
+                    <h3 class="interview-title">The Art of Epic Storytelling</h3>
+                    <span class="interview-year">2025</span>
+                    <p class="interview-desc">Rajamouli on crafting timeless cinematic universes.</p>
+                    <a href="#" class="watch-now-btn">Watch Now</a>
+                </div>
+            </div>
+            <!-- Interview Card 2 -->
+            <div class="interview-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="interview-thumb">
+                    <img src="images/interview2.jpg" alt="Interview 2 Thumbnail">
+                </div>
+                <div class="interview-content">
+                    <h3 class="interview-title">Vision Beyond Borders</h3>
+                    <span class="interview-year">2024</span>
+                    <p class="interview-desc">A global perspective on Indian cinema’s evolution.</p>
+                    <a href="#" class="watch-now-btn">Watch Now</a>
+                </div>
+            </div>
+            <!-- Interview Card 3 -->
+            <div class="interview-card" data-aos="fade-up" data-aos-delay="400">
+                <div class="interview-thumb">
+                    <img src="images/interview3.jpg" alt="Interview 3 Thumbnail">
+                </div>
+                <div class="interview-content">
+                    <h3 class="interview-title">Directing the Impossible</h3>
+                    <span class="interview-year">2026</span>
+                    <p class="interview-desc">Behind-the-scenes of legendary action sequences.</p>
+                    <a href="#" class="watch-now-btn">Watch Now</a>
+                </div>
+            </div>
+        </div>
+        <!-- Floating Golden Particles -->
+        <canvas id="goldParticles"></canvas>
+    </section>
+
+    <!-- Cinematic Quote Section -->
+    <section class="cinematic-quote-section" data-aos="fade-in">
+        <blockquote class="cinematic-quote">
+            <span>Cinema is the language through which I dream.</span>
+            <cite>— S. S. Rajamouli</cite>
+        </blockquote>
+    </section>
+
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+      AOS.init({
+        duration: 1100,
+        once: true,
+        offset: 80,
+        easing: 'ease-out-cubic',
+      });
+    </script>
+</body>
+</html>
