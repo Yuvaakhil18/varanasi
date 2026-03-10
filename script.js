@@ -1,3 +1,85 @@
+(function () {
+    // Alternate background: video, image, video, image, etc.
+    const videoEls = [
+        document.getElementById('bgVideo1'),
+        document.getElementById('bgVideo2'),
+        document.getElementById('bgVideo3')
+    ];
+    const slides = Array.from(document.querySelectorAll('.background-slider .slide'));
+    let current = 0;
+    // Build alternating sequence: [video1, slide1, video2, slide2, video3, slide3, ...]
+    const alternates = [];
+    const maxLen = Math.max(videoEls.length, slides.length);
+    for (let i = 0; i < maxLen; i++) {
+        if (videoEls[i]) alternates.push({ type: 'video', el: videoEls[i] });
+        if (slides[i]) alternates.push({ type: 'slide', el: slides[i] });
+    }
+    function showAlternate(idx) {
+        alternates.forEach((item, i) => {
+            if (item.type === 'video') {
+                item.el.classList.toggle('active', i === idx);
+            } else if (item.type === 'slide') {
+                item.el.classList.toggle('active', i === idx);
+            }
+        });
+    }
+    function nextAlternate() {
+        current = (current + 1) % alternates.length;
+        showAlternate(current);
+        scheduleNext();
+    }
+    let imageTimeout = null;
+    // Stop all videos and clear their handlers
+    function stopAllVideos() {
+        videoEls.forEach(v => {
+            if (v) {
+                v.onended = null;
+                v.pause();
+            }
+        });
+    }
+    function scheduleNext() {
+        const item = alternates[current];
+        if (!item) return;
+        // Always clear any previous timer before scheduling new
+        if (imageTimeout) {
+            clearTimeout(imageTimeout);
+            imageTimeout = null;
+        }
+        // Stop all videos first to prevent background videos from firing onended
+        stopAllVideos();
+        if (item.type === 'video') {
+            const v = item.el;
+            v.currentTime = 0;
+            // Wait for metadata to load to get correct duration
+            const playVideo = () => {
+                v.play().catch(() => {});
+                v.onended = () => {
+                    v.onended = null;
+                    nextAlternate();
+                };
+            };
+            if (v.readyState >= 1) {
+                playVideo();
+            } else {
+                v.onloadedmetadata = () => {
+                    v.onloadedmetadata = null;
+                    playVideo();
+                };
+            }
+        } else {
+            // Image: show for 15s, only advance after timer
+            imageTimeout = setTimeout(() => {
+                imageTimeout = null;
+                nextAlternate();
+            }, 15000);
+        }
+    }
+    if (alternates.length > 0) {
+        showAlternate(0);
+        scheduleNext();
+    }
+})();
 // ====================
 // INTRO SEQUENCE
 // ====================
@@ -46,6 +128,24 @@ function startMusicFadeIn(duration = 2500) {
 // COUNTDOWN TIMER
 // ====================
 
+// ====================
+
+// ====================
+// PARALLAX BACKGROUND FOR INTERVIEWS SECTION
+// ====================
+function parallaxInterviewsBg() {
+    const section = document.querySelector('.interviews-section');
+    if (!section) return;
+    section.addEventListener('mousemove', (e) => {
+        const x = (e.clientX / window.innerWidth - 0.5) * 2;
+        const y = (e.clientY / window.innerHeight - 0.5) * 2;
+        section.style.backgroundPosition = `${50 + x * 2}% ${50 + y * 2}%`;
+    });
+    section.addEventListener('mouseleave', () => {
+        section.style.backgroundPosition = '';
+    });
+}
+window.addEventListener('DOMContentLoaded', parallaxInterviewsBg);
 // Set the target release date: April 7, 2027 at midnight
 const releaseDate = new Date('2027-04-07T00:00:00').getTime();
 
@@ -199,4 +299,3 @@ bgMusic.addEventListener('ended', () => {
         }
     }
 })();
-
